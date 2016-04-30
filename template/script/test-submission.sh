@@ -2,13 +2,27 @@
 # nullglob makes globs return empty string if no matches found
 shopt -s nullglob
 
+red_bold="$(tput setaf 1)$(tput bold)"
+white_bold="$(tput setaf 15)$(tput bold)"
+cyan_bold="$(tput setaf 6)$(tput bold)"
+reset="$(tput sgr0)"
+
+warn(){
+  echo "${red_bold}WARNING:${white_bold}" "$@" "${reset}"
+}
+
+notice(){
+  echo "${red_bold}NOTICE:${white_bold}" "$@" "${reset}"
+}
+
+
 exit_code=0
 
 for submission in ./lab-*;do
-  echo "$(tput setaf 4)Runing mocha for dir ${submission}$(tput sgr0)"
-  cd "$submission"
-  mocha
+  notice "running mocha in directory ${submission}/test"
+  mocha "${submission/test}"
   if [[ "$?" -eq 1 ]];then 
+    warn "mocha failed in directory ${submission}/test"
     exit_code=1
   fi
 done
