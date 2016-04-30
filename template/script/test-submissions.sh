@@ -12,14 +12,20 @@ warn(){
 }
 
 notice(){
-  echo "${red_bold}NOTICE:${white_bold}" "$@" "${reset}"
+  echo "${cyan_bold}NOTICE:${white_bold}" "$@" "${reset}"
 }
-
 
 exit_code=0
 
 for submission in ./lab-*;do
   notice "running mocha in directory ${submission}/test"
+
+  eslint --quiet "${submission}"
+  if [[ "$?" -eq 1 ]];then 
+    warn "eslint failed in directory ${submission}/test"
+    exit_code=1
+  fi
+
   mocha "${submission/test}"
   if [[ "$?" -eq 1 ]];then 
     warn "mocha failed in directory ${submission}/test"
