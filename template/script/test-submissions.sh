@@ -26,7 +26,7 @@ for submission in ./lab-*;do
     exit_code=1
   fi
 
-  mocha "${submission/test}"
+  mocha "${submission}/test"
   if [[ "$?" -eq 1 ]];then 
     warn "mocha failed in directory ${submission}/test"
     exit_code=1
