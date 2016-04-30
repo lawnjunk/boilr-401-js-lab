@@ -2,8 +2,5 @@
     "Name": "401 js lab template",
     "Description": "Template to create 401 labs with travis setup",
     "Author": "slugbyte",
-    "Year": "2016",
-    "License": [
-        "MIT"
-    ]
+    "Year": "2016"
 }
