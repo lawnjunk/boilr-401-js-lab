@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
+
 # nullglob makes globs return empty string if no matches found
+# required for following for loop
 shopt -s nullglob
 
 red_bold="$(tput setaf 1)$(tput bold)"
@@ -18,7 +20,7 @@ notice(){
 exit_code=0
 
 for submission in ./lab-*;do
-  notice "running mocha in directory ${submission}/test"
+  notice "running eslint in directory ${submission}/test"
 
   eslint --quiet "${submission}"
   if [[ "$?" -eq 1 ]];then 
